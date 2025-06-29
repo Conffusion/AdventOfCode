@@ -1,0 +1,35 @@
+@startuml
+hide members
+NN -- CN
+NN --> NC
+CH --> CB
+CH --> BH
+HH --> HN
+HH --> NH
+CB --> CH
+CB --> HB
+NH --> NC
+NH --> CH
+HB --> HC
+HB --> CB
+HC --> HB
+HC --> BC
+HN --> HC
+HN --> CN
+BH --> BH
+BH --> HH
+NC --> NB
+NC --> BC
+NB --> NB
+NB --> BB
+BN --> BB
+BN --> NB
+BB --> BN
+BB --> NB
+BC --> BB
+BC --> BC
+CC --> CN
+CC --> NC
+CN --> CC
+CN --> CN
+@enduml

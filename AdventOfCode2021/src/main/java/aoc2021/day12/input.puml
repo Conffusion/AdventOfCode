@@ -1,0 +1,25 @@
+@startuml
+hide members
+start --XR
+start -- zw
+start -- vl
+zi -- end
+zk -- zi
+zk -- TS
+zw -- vl
+zk -- zw
+po -- end
+zw -- ws
+ws --TS
+TS -- po
+po -- YH
+po -- xk
+zi -- zi
+zk -- end
+zi -- XR
+XR -- zk
+vl -- TS
+XR -- zw
+XR -- vl
+XR -- ws
+@enduml

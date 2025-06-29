@@ -1,0 +1,12 @@
+@startuml
+dc -- end
+start -- HN
+start - kj
+dc -- start
+dc -- HN
+dc -- LN
+HN -- end
+sa - kj
+HN -- kj
+kj - dc
+@enduml
