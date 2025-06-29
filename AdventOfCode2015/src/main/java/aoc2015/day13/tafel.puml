@@ -1,0 +1,66 @@
+@startuml
+ rectangle George
+ rectangle Bob
+ rectangle Eric
+ rectangle Alice
+ rectangle Mallory
+ rectangle David
+ rectangle Carol
+ rectangle Frank
+ George --> Bob: 76
+ George --> Eric: 54
+ George --> Alice: 45
+ George --> Mallory: 7
+ George --> David: 54
+ George --> Carol: 63
+ George --> Frank: 30
+ Bob --> George: 23
+ Bob --> Eric: 49
+ Bob --> Alice: 93
+ Bob --> Mallory: 29
+ Bob --> David: 5
+ Bob --> Carol: 19
+ Bob --> Frank: 68
+ Eric --> George: 34
+ Eric --> Bob: -89
+ Eric --> Alice: 8
+ Eric --> Mallory: -99
+ Eric --> David: -34
+ Eric --> Carol: -69
+ Eric --> Frank: 95
+ Alice --> George: -4
+ Alice --> Bob: -2
+ Alice --> Eric: 21
+ Alice --> Mallory: -80
+ Alice --> David: 65
+ Alice --> Carol: -62
+ Alice --> Frank: -81
+ Mallory --> George: -99
+ Mallory --> Bob: -32
+ Mallory --> Eric: -66
+ Mallory --> Alice: 31
+ Mallory --> David: 91
+ Mallory --> Carol: 95
+ Mallory --> Frank: -75
+ David --> George: 75
+ David --> Bob: -96
+ David --> Eric: -30
+ David --> Alice: 43
+ David --> Mallory: -20
+ David --> Carol: -53
+ David --> Frank: -12
+ Carol --> George: -35
+ Carol --> Bob: -70
+ Carol --> Eric: -46
+ Carol --> Alice: -54
+ Carol --> Mallory: 10
+ Carol --> David: -37
+ Carol --> Frank: 33
+ Frank --> George: 18
+ Frank --> Bob: 6
+ Frank --> Eric: -17
+ Frank --> Alice: -97
+ Frank --> Mallory: -56
+ Frank --> David: 56
+ Frank --> Carol: -9
+@enduml

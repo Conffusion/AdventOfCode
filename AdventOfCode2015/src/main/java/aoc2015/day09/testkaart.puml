@@ -1,0 +1,10 @@
+@startuml
+ rectangle London
+ rectangle Dublin
+ Belfast --> London: 518
+ Belfast --> Dublin: 141
+ Dublin --> Belfast: 141
+ Dublin --> London: 464
+ London --> Belfast: 518
+ London --> Dublin: 464
+@enduml

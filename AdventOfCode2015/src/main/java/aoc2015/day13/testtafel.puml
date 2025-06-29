@@ -1,0 +1,18 @@
+@startuml
+ rectangle Bob
+ rectangle Alice
+ rectangle David
+ rectangle Carol
+ Bob --> Alice: 83
+ Bob --> David: -63
+ Bob --> Carol: -7
+ Alice --> Bob: 54
+ Alice --> David: -2
+ Alice --> Carol: -79
+ David --> Bob: -7
+ David --> Alice: 46
+ David --> Carol: 41
+ Carol --> Bob: 60
+ Carol --> Alice: -62
+ Carol --> David: 55
+@enduml
