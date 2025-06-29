@@ -1,0 +1,7 @@
+@startuml
+
+object "AA(2)" as AA
+object "BB(12)" as BB
+
+AA -- BB
+@enduml

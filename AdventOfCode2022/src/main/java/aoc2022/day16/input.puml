@@ -1,0 +1,17 @@
+@startuml
+  object "BB (13)" as BB #green
+  object "DD (20)" as DD #green
+  object "HH (22)" as HH #green
+  object "JJ (21)" as JJ #green
+  object "AA (0)" as AA #yellow
+  object "CC (2)" as CC #lightgreen
+  object "EE (3)" as EE #lightgreen
+
+  BB -[thickness=1]-- CC:1
+  BB -[thickness=1]-- AA:1
+  DD -[thickness=1]-- CC:1
+  DD -[thickness=1]-- AA:1
+  DD -[thickness=1]-- EE:1
+  HH -[thickness=3]-- EE:3
+  JJ -[thickness=2]-- AA:2
+@enduml
