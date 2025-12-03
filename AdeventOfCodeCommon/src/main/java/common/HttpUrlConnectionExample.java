@@ -6,11 +6,14 @@ import java.io.InputStreamReader;
 import java.io.UnsupportedEncodingException;
 import java.net.CookieHandler;
 import java.net.CookieManager;
+import java.net.URI;
 import java.net.URL;
 import java.net.URLEncoder;
 import java.util.ArrayList;
 import java.util.List;
+
 import javax.net.ssl.HttpsURLConnection;
+
 import org.jsoup.Jsoup;
 import org.jsoup.nodes.Document;
 import org.jsoup.nodes.Element;
@@ -23,6 +26,13 @@ public class HttpUrlConnectionExample {
 
   private final String USER_AGENT = "Mozilla/5.0";
 
+  /**
+   * 
+   * @param args
+   * <li> login email
+   * <li> password
+   * @throws Exception
+   */
   public static void main(String[] args) throws Exception {
 
 	String url = "https://accounts.google.com/ServiceLoginAuth";
@@ -35,7 +45,7 @@ public class HttpUrlConnectionExample {
 
 	// 1. Send a "GET" request, so that you can extract the form's data.
 	String page = http.GetPageContent(url);
-	String postParams = http.getFormParams(page, "conffusion@gmail.com", "sourceforge05");
+	String postParams = http.getFormParams(page, args[0], args[1]);
 
 	// 2. Construct above post's content and then send a POST request for
 	// authentication
@@ -48,7 +58,7 @@ public class HttpUrlConnectionExample {
 
   private void sendPost(String url, String postParams) throws Exception {
 
-	URL obj = new URL(url);
+	URL obj = new URI(url).toURL();
 	conn = (HttpsURLConnection) obj.openConnection();
 
 	// Acts like a browser
@@ -96,7 +106,7 @@ public class HttpUrlConnectionExample {
 
   private String GetPageContent(String url) throws Exception {
 
-	URL obj = new URL(url);
+	URL obj = new URI(url).toURL();
 	conn = (HttpsURLConnection) obj.openConnection();
 
 	// default is GET

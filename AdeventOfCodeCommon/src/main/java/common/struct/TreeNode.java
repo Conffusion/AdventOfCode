@@ -1,5 +1,11 @@
 package common.struct;
 
+/**
+ * Een TreeNode is een enkel element van een Tree data structuur.
+ * Er bestaat geen type Tree. Van een TreeNode kan er omhoog en omlaag genavigeerd worden. 
+ * Elke node kan max 2 childs hebben
+ * @param <T>
+ */
 public class TreeNode<T extends Comparable<T>> {
 	private TreeNode<T> parent;
 	private TreeNode<T> left, right;
@@ -63,5 +69,20 @@ public class TreeNode<T extends Comparable<T>> {
 			left.setLevel(level+1);
 		if(right!=null)
 			right.setLevel(level+1);
+	}
+
+	@Override
+	public String toString() {
+		return value!=null?value.toString(): "[" + left + "," + right+"]";
+	}
+	public TreeNode<T> clone() {
+		TreeNode<T> result=new TreeNode<>();
+		if(value!=null)
+			result.value=value;
+		if(left!=null)
+			result.setLeft(left.clone());
+		if(right!=null)
+			result.setRight(right.clone());
+		return result;
 	}
 }

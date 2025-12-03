@@ -2,10 +2,13 @@ package common.struct;
 
 import java.util.function.BiConsumer;
 
+/**
+ * Bevat utility methodes om een Tree te processen 
+ */
 public class TreeNodeUtils {
 
 	/**
-	 * Doorloop de Tree in volgorde: Left-Top-Right
+	 * Doorloop de Tree in volgorde: Top-Left-Right
 	 * @param <T>
 	 * @param root
 	 * @param consumeNull als true wordt handleNode ook aangeroepen wanneer de value van de node null is.
@@ -23,7 +26,7 @@ public class TreeNodeUtils {
 	}
 	
 	/**
-	 * Ga naar de eerste node aan de linkerzijde.
+	 * Ga naar het eerste blad aan de linkerzijde.
 	 * <pre>
 	 *                  A
 	 *                 /  \
@@ -40,9 +43,12 @@ public class TreeNodeUtils {
 	 */
 	public static <T extends Comparable<T>> TreeNode<T> findLeftLeaf(TreeNode<T> node) {
 		// ga naar boven tot eerste knoop waar huidige rechts is en er een linkse knoop is
+		TreeNode<T> oldnode=node;
 		TreeNode<T> temp=node.getParent();
-		while(temp!=null&&temp.getLeft()==node)
+		while(temp!=null&&temp.getLeft()==oldnode) {
+			oldnode=temp;
 			temp=temp.getParent();
+		}
 		if(temp==null)
 			return null;
 		temp=temp.getLeft();
@@ -71,9 +77,12 @@ public class TreeNodeUtils {
 	 */
 	public static <T extends Comparable<T>> TreeNode<T> findRightLeaf(TreeNode<T> node) {
 		// ga naar boven tot eerste knoop waar huidige links is en er een rechtse knoop is
+		TreeNode<T> oldnode=node;
 		TreeNode<T> temp=node.getParent();
-		while(temp!=null&&temp.getRight()==node)
+		while(temp!=null&&temp.getRight()==oldnode) {
+			oldnode=temp;
 			temp=temp.getParent();
+		}
 		if(temp==null)
 			return null;
 		temp=temp.getRight();
@@ -81,5 +90,5 @@ public class TreeNodeUtils {
 		while(temp.getLeft()!=null)
 			temp=temp.getLeft();
 		return temp;
-	}
+	}	
 }

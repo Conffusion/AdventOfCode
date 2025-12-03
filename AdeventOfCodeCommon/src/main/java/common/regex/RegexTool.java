@@ -27,6 +27,12 @@ public class RegexTool {
     	throwUnmatched=true;
     	return this;
     }
+    /**
+     * parsed de value volgens de pattern.
+     * @param value
+     * @return matched de value met het patroon ?
+     * @throws IllegalArgumentException als value niet matched met pattern en throwUnmatched=true
+     */
     public boolean evaluate(String value)
     {
         matcher=patt.matcher(value);

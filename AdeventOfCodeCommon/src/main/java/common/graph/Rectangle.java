@@ -1,5 +1,9 @@
 package common.graph;
 
+/**
+ * Rechthoek in een 2D ruimte.
+ * Voor de methodes die de plaats van de rechthoek bepalen t.o.v. een punt, is (0,0) links bovenaan.
+ */
 public class Rectangle {
     // pTop: upper left corner of the rectangle
     // pBottom: lower right corner of the rectangle
