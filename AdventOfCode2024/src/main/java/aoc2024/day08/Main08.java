@@ -40,7 +40,7 @@ public class Main08 extends AbstractMainMaster<Integer> {
     public void beforeEach() {
     	terrein=new CharTerrein(loadInputInto2DArray(dimx, dimy));
     	antennes=new HashMap<>();
-    	terrein.scan((a,p)->antennes.computeIfAbsent(a, a2->new ArrayList<Point>()).add(p));
+    	terrein.scan((a,p)->antennes.computeIfAbsent(a, _->new ArrayList<Point>()).add(p));
     	antennes.remove('.'); // dit is geen antenne
     	antinodes=new HashSet<>();	
     }

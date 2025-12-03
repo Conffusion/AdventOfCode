@@ -50,7 +50,7 @@ public class Main06 extends AbstractMainMaster<Long> {
     	guard=inputGuard;
     	while(true) {
     		switch(guard.canForward()) {
-    		case OUT_OF_BOUND: return terrein.scanAndSum((c,p)->c==PAD?1L:0L);
+    		case OUT_OF_BOUND: return terrein.scanAndSum((c,_)->c==PAD?1L:0L);
     		case OBSTACLE:
     			guard.setDirection(guard.getDir().turnRight()); break;
     		case POSSIBLE:
@@ -71,7 +71,7 @@ public class Main06 extends AbstractMainMaster<Long> {
     // antwoord : 1482
     public Long star2() {
     	maxPadSize=dimx*dimy;
-    	return inputTerrein.scanAndSum((c,p)->zetOpstakelEnTest(p));
+    	return inputTerrein.scanAndSum((_,p)->zetOpstakelEnTest(p));
     }
     /**
      * Geeft 1 terug als ons pad langer wordt dan maxPadSize (en we dus in een loop lopen), anders 0.

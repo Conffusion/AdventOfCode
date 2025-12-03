@@ -12,7 +12,7 @@ import common.regex.RegexTool;
 public class Main17 extends AbstractMainMaster<Long> {
     public static void main(String[] args) {
     	new Main17()
-    		//.testMode()
+    		.testMode()
             //.nolog()
            .start();
     }

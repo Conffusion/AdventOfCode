@@ -124,7 +124,7 @@ public class Main14 extends AbstractMainMaster<Long> {
 			this.pos = pos;
 			this.velo = velo;
 			this.id=++robotSeq;
-			robotLoc.computeIfAbsent(pos, p->new HashSet<Robot>()).add(this);
+			robotLoc.computeIfAbsent(pos, _->new HashSet<Robot>()).add(this);
 		}
 		
 		public void moveTo(Point pos) {
@@ -147,8 +147,8 @@ public class Main14 extends AbstractMainMaster<Long> {
 		}
     }
     private void robotMoved(Robot r, Point oldPos, Point newPos) {
-    	robotLoc.computeIfAbsent(oldPos, p->new HashSet<Robot>()).remove(r);
-    	robotLoc.computeIfAbsent(newPos, p->new HashSet<Robot>()).add(r);
+    	robotLoc.computeIfAbsent(oldPos, _->new HashSet<Robot>()).remove(r);
+    	robotLoc.computeIfAbsent(newPos, _->new HashSet<Robot>()).add(r);
     }
     private boolean hasRobotAtPos(Point pos) {
     	Set<Robot> list=robotLoc.get(pos);

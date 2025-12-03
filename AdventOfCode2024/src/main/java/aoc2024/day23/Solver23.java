@@ -12,7 +12,10 @@ import org.apache.commons.io.IOUtils;
 import org.apache.commons.lang3.StringUtils;
 
 import common.graph.PlantUMLGenerator;
-import common.main.AbstractMainMaster;
+import common.io.Loader;
+import common.main2.AoCLogger;
+import common.main2.AoCRunner;
+import common.main2.AoCSolver;
 import common.regex.RegexMatchBuilder;
 /**
  * zoek het grootste subnetwerk van computers binnen een network die een verbinding hebben met elke andere computer van dit subnetwork. 
@@ -20,13 +23,12 @@ import common.regex.RegexMatchBuilder;
  * bron: https://www.geeksforgeeks.org/maximal-clique-problem-recursive-solution/
  * 
  */
-public class Main23 extends AbstractMainMaster<Integer> {
-    public static void main(String[] args) {
-        new Main23()
-            //.testMode()
-            //.withFileOutput()
-            //.nolog()
-           .start();
+public class Solver23 extends AoCSolver<Integer> {
+	static AoCLogger logger=new AoCLogger();
+	Loader loader=Loader.forMain(this).withTestMode(false).build();
+	public static void main (String[] args) {
+		logger.nolog(true);
+		new AoCRunner<>(new Solver23()).start();
     }
     Map<String,Node> network;
 	PlantUMLGenerator mapGen=new PlantUMLGenerator("aoc2024/day23","lan.puml");
@@ -35,8 +37,8 @@ public class Main23 extends AbstractMainMaster<Integer> {
     public void beforeAll() {
     	network=new HashMap<>();
     	RegexMatchBuilder matchBuilder=new RegexMatchBuilder("([a-z]{2})-([a-z]{2})");
-    	streamInput(matchBuilder).forEach(rm->buildGraph(rm.group(1),rm.group(2)));
-    	network.keySet().forEach(s->mapGen.addNode(s));
+    	loader.streamInput(matchBuilder).forEach(rm->buildGraph(rm.group(1),rm.group(2)));
+    	network.keySet().forEach(mapGen::addNode);
     	network.values().forEach(n->{for (Node n2:n.connections) mapGen.addConnection(n.name, n2.name);});
     	IOUtils.closeQuietly(mapGen);
     	System.out.println(""+network.keySet().size());
@@ -57,11 +59,11 @@ public class Main23 extends AbstractMainMaster<Integer> {
     /**
      * zoek de grootste groep van computers die aan elkaar hangen (elke computer moet connectie hebben met elke andere)
      */
-    // antwoord : 
+    // antwoord : 13
     public Integer star2() {
         Map<String, Set<String> > graph=new HashMap<>();
         for(Node node:network.values()) {
-        	graph.computeIfAbsent(node.name,name-> new HashSet<String>())
+        	graph.computeIfAbsent(node.name,_-> new HashSet<String>())
         		.addAll(node.connections.stream().map(n->n.name).toList());
         }
         Set<Set<String> > allCliques

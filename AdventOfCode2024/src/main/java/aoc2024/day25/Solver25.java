@@ -1,19 +1,23 @@
 package aoc2024.day25;
+
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 
-import common.main.AbstractMainMaster;
+import common.io.Loader;
+import common.main2.AoCLogger;
+import common.main2.AoCRunner;
+import common.main2.AoCSolver;
 
-public class Main25 extends AbstractMainMaster<Long> {
-    public static void main(String[] args) {
-        new Main25()
-            //.testMode()
-            //.withFileOutput()
-            //.nolog()
-           .start();
-    }
-
+public class Solver25 extends AoCSolver<Long> {
+	static AoCLogger logger=new AoCLogger();
+	Loader loader=Loader.forMain(this).withTestMode(false).build();
+	
+	public static void main (String[] args) {
+		//logger.nolog(true);
+		new AoCRunner<>(new Solver25()).start();
+	}
+	
     List<Code> keys;
     List<Code> locks;
     
@@ -21,7 +25,7 @@ public class Main25 extends AbstractMainMaster<Long> {
     public void beforeEach() {
     	keys=new ArrayList<>();
     	locks=new ArrayList<>();
-    	List<String>input=loadInputByLine();
+    	List<String>input=loader.loadInputByLine();
     	int r=-1;
     	Code currCode=null;
     	// elke 8 rijen vormen 1 set (KEY of LOCK)
@@ -57,7 +61,7 @@ public class Main25 extends AbstractMainMaster<Long> {
         for(Code key:keys) {
         	for(Code lock:locks) {
         		if(fit(key,lock)) {
-        			logln("fit: "+key+","+lock);
+        			logger.logln(()->"fit: "+key+","+lock);
         			result++;
         		}
         	}
