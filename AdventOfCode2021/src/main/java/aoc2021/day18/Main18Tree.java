@@ -13,7 +13,7 @@ public class Main18Tree extends AbstractMainMaster<Long> {
 
     public static void main(String[] args) {
         new Main18Tree()
-        .testMode()
+ //       .testMode()
         .start();
     }
 
@@ -30,12 +30,38 @@ public class Main18Tree extends AbstractMainMaster<Long> {
         	root.setLevel(0);
         	root.setLeft(lroot);
         	root.setRight(sfnumbers.get(i));
+//        	System.out.println("After adding "+i+": "+Main18Tree.toString(root));
         	reduce(root);
+//        	System.out.println("After reducing "+i+": "+Main18Tree.toString(root));
         	lroot=root;
         }
         return magnitude(lroot);
     } 
-    int index=0;
+    
+    @Override
+	public Long star2() {
+    	Long highestMagitude=0L;
+        for (int i=0;i<sfnumbers.size();i++) {
+        	jloop:
+            for (int j=0;j<sfnumbers.size();j++) {
+            	if(i==j) continue jloop;
+            	TreeNode<Integer> root=new TreeNode<>();
+            	root.setLeft(sfnumbers.get(i));
+            	root.setRight(sfnumbers.get(j));
+//            	System.out.println("Checking ("+i+","+j+"):"+root);
+            	TreeNode<Integer> temp=root.clone();
+            	reduce(temp);
+            	Long magnitude=magnitude(temp);
+            	if(magnitude>highestMagitude) {
+            		highestMagitude=magnitude;
+            		System.out.println("New highest ("+magnitude+"):"+root);
+            	}
+            }
+        }
+    	return highestMagitude;
+	}
+
+	int index=0;
     private TreeNode<Integer> startParseSFNumber(char[] line) {
     	index=0;
     	return parseSFNumber(line);
@@ -57,36 +83,23 @@ public class Main18Tree extends AbstractMainMaster<Long> {
         index++;
         return currNode;
     }
-    
-//    private void fillTree(TreeNode<Integer>node, SFNumber sfn) {
-//    	if(sfn.getSfnum1()!=null) {
-//    		TreeNode<Integer> lchild=new TreeNode<>();
-//    		node.setLeft(lchild);
-//    		fillTree(lchild,sfn.getSfnum1());
-//    	} else if(sfn.getPart1()>-1){
-//    		node.setLeft(new TreeNode<>(sfn.getPart1()));
-//    	}
-//    	if(sfn.getSfnum2()!=null) {
-//    		TreeNode<Integer> rchild=new TreeNode<>();
-//    		node.setLeft(rchild);
-//    		fillTree(rchild,sfn.getSfnum2());
-//    	} else if(sfn.getPart2()>-1){
-//    		node.setRight(new TreeNode<>(sfn.getPart2()));
-//    	}    	
-//    }
-    
+
     private TreeNode<Integer> reduce(TreeNode<Integer> root){
     	while(true) {
 	    	// first check on level 5 nodes to explode
 	    	TreeNodeWalker<Integer,Boolean> explodeWalker=new TreeNodeWalker<>(root);
 	    	explodeWalker.withNodeHandler(new Exploder(explodeWalker));
-	    	if(explodeWalker.walkLPR(true,false))
+	    	if(explodeWalker.walkLPR(true,false)) {
+//	    		System.out.println("After explode "+Main18Tree.toString(root));
 	    		continue;
+	    	}
 	    	// check on values > 10 to split
 	    	TreeNodeWalker<Integer,Boolean> splitWalker=new TreeNodeWalker<>(root);
 	    	splitWalker.withNodeHandler(new Splitter(splitWalker));
-	    	if(!splitWalker.walkLPR(true,false))
+	    	if(!splitWalker.walkLPR(true,false)) {
+//	    		System.out.println("After split "+Main18Tree.toString(root));	    		
 	    		break;
+	    	}
     	}
     	return root;
     }
@@ -102,6 +115,7 @@ public class Main18Tree extends AbstractMainMaster<Long> {
 		public void accept(TreeNode<Integer> curr, Integer v) {
 			if(curr.getLevel()==5) {
 				curr=curr.getParent();
+//				System.out.println("Level 5 node: "+Main18Tree.toString(curr));
 				// process left child number
 				TreeNode<Integer> newleft=TreeNodeUtils.findLeftLeaf(curr);
 				if(newleft!=null) {
@@ -130,6 +144,7 @@ public class Main18Tree extends AbstractMainMaster<Long> {
 		@Override
 		public void accept(TreeNode<Integer> curr, Integer v) {
 			if(curr.getValue()!=null &&curr.getValue()>=10) {
+//				System.out.println("Split needed: "+Main18Tree.toString(curr.getParent()));
 				curr.setLeft(new TreeNode<Integer>(curr.getValue()/2));
 				curr.setRight(new TreeNode<Integer>(curr.getValue()/2));
 				if(curr.getValue()%2==0)
@@ -148,6 +163,21 @@ public class Main18Tree extends AbstractMainMaster<Long> {
     		return node.getValue();
     	if(node.getLeft()==null||node.getRight()==null)
     		throw new IllegalArgumentException("tree is corrupt at node "+node);
-    	return magnitude(node.getLeft())+magnitude(node.getRight());
+    	return 3*magnitude(node.getLeft())+2*magnitude(node.getRight());
+    }
+    
+    private static String toString(TreeNode<Integer> node) {
+    	if(node.getValue()!=null)
+    		return Integer.toString(node.getValue());
+    	StringBuilder buf=new StringBuilder();
+    	buf.append("[");
+    	if(node.getLeft()!=null) 
+        	buf.append(toString(node.getLeft()));
+    	
+    	buf.append(",");
+    	if(node.getRight()!=null)
+    		buf.append(toString(node.getRight()));
+    	buf.append("]");
+    	return buf.toString();
     }
 }
