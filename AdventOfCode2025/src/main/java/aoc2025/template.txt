@@ -1,0 +1,34 @@
+package aoc#year#.day#dagnr#;
+
+import common.io.Loader;
+import common.main2.AoCLogger;
+import common.main2.AoCRunner;
+import common.main2.AoCSolver;
+
+public class Solver#dagnr# extends AoCSolver<Long> {
+	static AoCLogger logger=new AoCLogger();
+	Loader loader=Loader.forMain(this).withTestMode(false).build();
+	
+	public static void main (String[] args) {
+		//logger.nolog(true);
+		new AoCRunner<>(new Solver#dagnr#()).start();
+	}
+	  
+    @Override
+    public void beforeEach() {
+    }
+
+    // antwoord : 
+    public Long star1() {
+        Long result=0L;
+        return result;
+    }
+
+    // antwoord : 
+    public Long star2() {
+        Long result=0L;
+
+        return result;
+
+    }
+}
