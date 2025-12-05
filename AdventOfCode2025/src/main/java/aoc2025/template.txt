@@ -7,11 +7,15 @@ import common.main2.AoCSolver;
 
 public class Solver#dagnr# extends AoCSolver<Long> {
 	static AoCLogger logger=new AoCLogger();
-	Loader loader=Loader.forMain(this).withTestMode(false).build();
+	static boolean testMode=false;
+	Loader loader=Loader.forMain(this).withTestMode(testMode).build();
 	
 	public static void main (String[] args) {
 		//logger.nolog(true);
-		new AoCRunner<>(new Solver#dagnr#()).start();
+		AoCRunner<Long> runner=new AoCRunner<>(new Solver#dagnr#());
+		if(testMode)
+			runner.testMode();
+		runner.start();
 	}
 	  
     @Override
@@ -21,6 +25,7 @@ public class Solver#dagnr# extends AoCSolver<Long> {
     // antwoord : 
     public Long star1() {
         Long result=0L;
+        
         return result;
     }
 
@@ -29,6 +34,5 @@ public class Solver#dagnr# extends AoCSolver<Long> {
         Long result=0L;
 
         return result;
-
     }
 }
