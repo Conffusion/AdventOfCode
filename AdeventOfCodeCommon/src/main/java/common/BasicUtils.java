@@ -6,6 +6,7 @@ import java.util.HashSet;
 import java.util.List;
 import java.util.Map;
 import java.util.Set;
+import java.util.function.Function;
 import java.util.function.ToLongFunction;
 import java.util.stream.Collectors;
 import java.util.stream.Stream;
@@ -131,5 +132,20 @@ public class BasicUtils {
 	
 	public static <T> Long streamSum(Stream<T> stream,ToLongFunction<T> converter) {
 		return stream.collect(Collectors.summarizingLong(converter)).getSum();
+	}
+	/**
+	 * 
+	 * @param <T> type van te evalueren object
+	 * @param <V> type van return waarde
+	 * @param i input object
+	 * @param converter functie om V waarde uit i te halen. Wordt enkel aangeroepen wanneer i niet null is
+	 * @param defaultValue waarde wordt teruggegeven wanneer i null is
+	 * @return resultaat van converter of defaultValue;
+	 */
+	public static <T,V> V onNotNull(T i, Function<T,V> converter,V defaultValue) {
+		if(i!=null)
+			return converter.apply(i);
+		else
+			return defaultValue;
 	}
 }

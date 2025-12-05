@@ -39,13 +39,17 @@ public class Terrein<E> {
 	 * @throws NoSuchFieldException
 	 */
 	@SuppressWarnings("unchecked")
-	public Terrein(int dimx, int dimy, Class<E> clazz, String pointFieldName)throws NoSuchFieldException {
+	public Terrein(int dimx, int dimy, Class<E> clazz, String pointFieldName) {
 		this.clazz=clazz;
 		try {
 			pointField=clazz.getDeclaredField(pointFieldName);
 		} catch (NoSuchFieldException noField) {
-			// we proberen 1 niveau hoger
-			pointField=clazz.getSuperclass().getDeclaredField(pointFieldName);
+			try {
+				// we proberen 1 niveau hoger
+				pointField=clazz.getSuperclass().getDeclaredField(pointFieldName);
+			} catch (NoSuchFieldException noField2) {
+				throw new RuntimeException("Geen Point veld met naam "+pointFieldName+" gevonden in "+clazz.getName());
+			}
 		}
 		this.terrein = (E[][])Array.newInstance(clazz, dimx, dimy);
 		this.dim=new Dimension(dimx,dimy);
@@ -75,7 +79,14 @@ public class Terrein<E> {
 		}
 		return null;
 	}
-	
+	/**
+	 * Geeft de waarde op positie p.
+	 * Als p buiten het terrein valt hangt het antwoord af van onOutOfBound waarde:
+	 * <li>THROW_ERROR -> exception
+	 * <li>IGNORE -> null
+	 * @param p
+	 * @return
+	 */
 	public E getField(Point p) {
 		if(validPoint(p))
 			return terrein[p.x][p.y];
@@ -108,6 +119,7 @@ public class Terrein<E> {
 	    // Convert spliterator into a sequential stream 
 	    return StreamSupport.stream(spitr, false);
     }
+	
 	public Traverser walker() {
 		return new Traverser();
 	}
