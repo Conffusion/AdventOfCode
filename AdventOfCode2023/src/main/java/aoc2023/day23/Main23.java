@@ -30,11 +30,7 @@ public class Main23 extends AbstractMainMaster<Long> {
 		} else {
 			dimx=141; dimy=141;
 		}
-		try {
-			bos=new Terrein<Vak23>(dimx,dimy,Vak23.class,"point");
-		} catch (NoSuchFieldException e) {
-			throw new RuntimeException("Class Vak heeft geen veld 'point'");
-		}
+		bos=new Terrein<Vak23>(dimx,dimy,Vak23.class,"point");
 		loadInputInto2DTArray(bos,new InputConverter());
 	}
     

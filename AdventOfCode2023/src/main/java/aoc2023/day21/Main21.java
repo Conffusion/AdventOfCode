@@ -35,11 +35,7 @@ public class Main21 extends AbstractMainMaster<Long> {
     		dimx=131; dimy=131;
     		maxDist=64;
     	}
-    	try {
-			tuin=new Terrein<Vak>(dimx,dimy,Vak.class,"point");
-		} catch (NoSuchFieldException e) {
-			throw new RuntimeException("Class Vak heeft geen veld 'point'");
-		}
+		tuin=new Terrein<Vak>(dimx,dimy,Vak.class,"point");
     	loadInputInto2DTArray(tuin,new InputConverter());
     }
     class InputConverter implements InputCharConverter<Vak> {
