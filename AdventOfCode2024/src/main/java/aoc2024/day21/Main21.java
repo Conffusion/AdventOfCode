@@ -49,7 +49,7 @@ public class Main21 extends AbstractMainMaster<Long> {
         Long result=0L;
         for(String line:instructions) {
         	char[] instr=line.split("=")[1].toCharArray();
-        	Function<Character,Long> ir=c->1L;
+        	Function<Character,Long> ir=_->1L;
         	for(int i=0;i<robotCnt;i++)ir=new DirPadRobot(ir,i+1);
             long subresult=0L;
             for(char c:instr)
@@ -84,7 +84,7 @@ public class Main21 extends AbstractMainMaster<Long> {
     		    		if(bestSize>subsize) 
     		    			bestSize=subsize;
     				}
-		    		memory.computeIfAbsent(from,c->new HashMap<Character,Long>())
+		    		memory.computeIfAbsent(from,_->new HashMap<Character,Long>())
 		    			.put(to, bestSize);
     			}
     		}
@@ -128,7 +128,7 @@ public class Main21 extends AbstractMainMaster<Long> {
     private static class DirectionPadInstructionBuilder {
     	Map<Character,Map<Character,String[]>> allDirectionPadInstructions=new HashMap<Character,Map<Character,String[]>>();
     	public DirectionPadInstructionBuilder add(Character from, Character to,String[] wayInstr) {
-    		allDirectionPadInstructions.computeIfAbsent(from, f->new HashMap<Character,String[]>()).put(to, wayInstr);
+    		allDirectionPadInstructions.computeIfAbsent(from, _->new HashMap<Character,String[]>()).put(to, wayInstr);
     		return this;
     	}
     	public Map<Character,Map<Character,String[]>> build() {
