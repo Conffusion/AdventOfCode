@@ -7,12 +7,13 @@ import common.main2.AoCSolver;
 
 public class Solver#dagnr# extends AoCSolver<Long> {
 	static AoCLogger logger=new AoCLogger();
-	static boolean testMode=false;
+	static boolean testMode=true;
 	Loader loader=Loader.forMain(this).withTestMode(testMode).build();
 	
 	public static void main (String[] args) {
 		//logger.nolog(true);
 		AoCRunner<Long> runner=new AoCRunner<>(new Solver#dagnr#());
+		logger.nolog(false);
 		if(testMode)
 			runner.testMode();
 		runner.start();

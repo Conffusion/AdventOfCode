@@ -20,7 +20,7 @@ public class DayBuilder2025 {
         int jaar=LocalDate.now().getYear();
         int dagnr=LocalDate.now().getDayOfMonth();
         jaar=2025;
-        dagnr=5;
+        dagnr=6;
         new DayBuilder2025(jaar,dagnr)
         .writeMain()
         .writeInputFile()
