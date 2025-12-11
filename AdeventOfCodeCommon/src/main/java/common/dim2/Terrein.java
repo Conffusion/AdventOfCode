@@ -60,6 +60,10 @@ public class Terrein<E> {
 		return this;
 	}
 
+	public Dimension getDim() {
+		return dim;
+	}
+
 	/**
 	 * Zet value op plaats p
 	 * @param p positie. Moet binnen terrein vallen.
