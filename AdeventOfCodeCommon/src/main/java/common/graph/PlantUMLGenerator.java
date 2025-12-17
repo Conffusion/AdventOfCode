@@ -31,6 +31,7 @@ public class PlantUMLGenerator implements Closeable{
 			throw new RuntimeException(e);
 		}
 	}
+
 	public PlantUMLGenerator addNode(String name) {
 		return addNode(name,null);
 	}

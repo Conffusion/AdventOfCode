@@ -14,7 +14,12 @@ public class AoCContext {
 	private File currentFolder;
 	private AoCFileWriter outputFileWriter;
 	public Consumer<String[]> writeToFileImpl=(s)->{};
-	
+
+	public AoCContext(AoCSolver<?> solver) {
+		String packName=solver.getClass().getPackageName().replace(".", "/");
+		currentFolder=new File("./src/main/java/"+packName);
+
+	}
 	public boolean isTestMode() {
 		return testMode;
 	}

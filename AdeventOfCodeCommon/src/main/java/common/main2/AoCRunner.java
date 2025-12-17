@@ -8,7 +8,7 @@ public class AoCRunner<T> {
 	private AoCLogger logger;
 	
 	public AoCRunner(AoCSolver<T> solver) {
-		context=new AoCContext();
+		context=new AoCContext(solver);
 		logger=new AoCLogger();
 		this.solver=solver;
 		solver.setContext(context);
